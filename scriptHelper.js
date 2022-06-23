@@ -6,18 +6,20 @@ const NOT_NUMBER = "Not a Number";
 const NUMBER = "Is a Number";
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
-    // Here is the HTML formatting for our mission target div.
-    /*
-                 <h2>Mission Destination</h2>
-                 <ol>
-                     <li>Name: </li>
-                     <li>Diameter: </li>
-                     <li>Star: ${star}</li>
-                     <li>Distance from Earth: </li>
-                     <li>Number of Moons: </li>
-                 </ol>
-                 <img src="">
-    */
+    let missionTarget = document.getElementById('missionTarget');
+    let innerHTML = "";
+
+    innerHTML += "<h2>Mission Destination</h2>";
+    innerHTML += "<ol>";
+    innerHTML += `<li>Name: ${name}</li>`;
+    innerHTML += `<li>Diameter: ${diameter}</li>`;
+    innerHTML += `<li>Star: ${star}</li>`;
+    innerHTML += `<li>Distance from Earth: ${distance}</li>`;
+    innerHTML += `<li>Number of Moons: ${moons}</li>`;
+    innerHTML += "</ol>";
+    innerHTML += `<img src="${imageUrl}">`;
+
+    missionTarget.innerHTML = innerHTML;
 }
 
 function validateInput(testInput) {
@@ -33,19 +35,21 @@ function validateInput(testInput) {
 }
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-
+    console.log("Form submission");
 }
 
 async function myFetch() {
     let planetsReturned;
 
-    planetsReturned = await fetch().then(function (response) {
+    planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then(function (response) {
+        return response.json();
     });
 
     return planetsReturned;
 }
 
 function pickPlanet(planets) {
+    return planets[Math.floor(Math.random() * planets.length)]
 }
 
 module.exports.addDestinationInfo = addDestinationInfo;
